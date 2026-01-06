@@ -108,3 +108,13 @@ with torch.no_grad():
         correct += (predicted == lbls).sum().item()
 
 print(f"\nTest Accuracy: {100 * correct / total:.2f}%")
+
+checkpoint_path = "/content/drive/MyDrive/dataset/cnn_checkpoint.pth"
+
+torch.save({
+    "model_state": model.state_dict(),
+    "optimizer_state": optimizer.state_dict(),
+    "epoch": epoch,
+}, checkpoint_path)
+
+print("Checkpoint saved.")
