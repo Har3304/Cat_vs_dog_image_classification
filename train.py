@@ -8,7 +8,6 @@ from tqdm import tqdm
 import numpy as np
 from collections import Counter
 
-# Device setup
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print("Running on:", DEVICE)
 
@@ -59,7 +58,7 @@ class CNNModel(nn.Module):
 
     def forward(self, x):
         x = self._forward_features(x)
-        x = x.view(x.size(0), -1)  # Safe flatten
+        x = x.view(x.size(0), -1)
         x = F.relu(self.fc1(x))
         x = self.dropout(x)
         x = self.fc2(x)
@@ -75,7 +74,7 @@ EPOCHS = 10
 for epoch in range(EPOCHS):
     model.train()
     total_loss = 0
-    correct, total = 0, 0  # Track training accuracy
+    correct, total = 0, 0
 
     pbar = tqdm(train_dl, desc=f"Epoch {epoch+1}/{EPOCHS}")
     for imgs, lbls in pbar:
